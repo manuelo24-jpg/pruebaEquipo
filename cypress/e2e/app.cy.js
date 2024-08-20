@@ -1,29 +1,39 @@
-// cypress/integration/imageChange.spec.js
-
-describe('Image Change Test', () => {
+describe('App.vue', () => {
     beforeEach(() => {
-      // Visita la página principal
       cy.visit('/');
     });
   
-    it('should change the image when buttons are clicked', () => {
-      // Verifica que la imagen inicial es 'gato.jpg'
-      cy.get('img').should('have.attr', 'src', 'gato.jpg');
+    it('should render the animal selector and form', () => {
+      cy.get('.pruebaAnimales').should('exist');
+      cy.get('.pruebaFormulario').should('exist');
+    });
   
-      // Haz clic en el botón 'Perro' y verifica que la imagen cambia a 'perro.jpg'
-      cy.contains('button', 'Perro').click();
-      cy.get('img').should('have.attr', 'src', 'perro.jpg');
+    it('should add a new animal and display it in the list', () => {
+      cy.get('#nombre').type('Tigre');
+      cy.get('#imagen').type('tigre.jpg');
+      cy.get('#patas').type('4');
+      cy.get('#sonido').type('Rugido');
+      cy.get('#color').type('Naranja');
+      cy.get('form').submit();
   
-      // Haz clic en el botón 'Caballo' y verifica que la imagen cambia a 'caballo.jpeg'
-      cy.contains('button', 'Caballo').click();
-      cy.get('img').should('have.attr', 'src', 'caballo.jpeg');
+      cy.get('.botones button').should('have.length', 5); // 4 iniciales + 1 nuevo
+      cy.get('.botones button').last().should('contain', 'Tigre');
+    });
   
-      // Haz clic en el botón 'Leon' y verifica que la imagen cambia a 'leon.jpg'
-      cy.contains('button', 'Leon').click();
-      cy.get('img').should('have.attr', 'src', 'leon.jpg');
+    it('should display the selected animal details', () => {
+      cy.get('.botones button').first().click(); // Selecciona el primer animal
   
-      // Haz clic en el botón 'Gato' y verifica que la imagen cambia a 'gato.jpg'
-      cy.contains('button', 'Gato').click();
-      cy.get('img').should('have.attr', 'src', 'gato.jpg');
+      cy.get('h2').should('contain', 'Datos del animal seleccionado:');
+      cy.get('p').should('contain', 'Nombre: Gato');
+    });
+  
+    it('should toggle image visibility', () => {
+      cy.get('.botones button').last().click(); // Botón de toggle
+  
+      cy.get('.imagen').should('not.exist');
+  
+      cy.get('.botones button').last().click(); // Botón de toggle
+  
+      cy.get('.imagen').should('exist');
     });
   });
