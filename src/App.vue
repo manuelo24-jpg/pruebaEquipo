@@ -1,6 +1,12 @@
 <script setup>
 import { ref } from "vue";
 var imagen = ref("gato.jpg");
+const animales = ref([
+  { nombre: "gato", imagen: "gato.jpg" },
+  { nombre: "perro", imagen: "perro.jpg" },
+  { nombre: "caballo", imagen: "caballo.jpeg" },
+  { nombre: "leon", imagen: "leon.jpg" },
+]);
 const cambiarImagen = (nuevaImagen) => {
   imagen.value = nuevaImagen;
 };
@@ -10,12 +16,16 @@ const cambiarImagen = (nuevaImagen) => {
   <div class="container">
     <h1>Selector de animales</h1>
     <div class="botones">
-      <button @click="cambiarImagen('gato.jpg')">Gato</button>
-      <button @click="cambiarImagen('perro.jpg')">Perro</button>
-      <button @click="cambiarImagen('caballo.jpeg')">Caballo</button>
-      <button @click="cambiarImagen('leon.jpg')">Leon</button>
+      <button
+        v-for="animal in animales"
+        :key="animal.imagen"
+        @click="cambiarImagen(animal.imagen)"
+      >
+        {{ animal.nombre }}
+      </button>
     </div>
     <img :src="imagen" :alt="imagen" />
+    <div></div>
   </div>
 </template>
 
