@@ -1,23 +1,31 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import Operaciones from './components/Operaciones.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="Super logo" class="logo" src="./assets/super.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" success="texto de prueba"/>
+      <HelloWorld msg="Hello World" <img alt="Super logo" class="logo" src="./assets/super.svg" width="125" height="125" />/>
     </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <Operaciones/>
+  
   </main>
 </template>
 
 <style scoped>
+body{
+  background-color:darkslategrey;
+}
+main{
+  background-color:cadetblue;
+}
 header {
   line-height: 1.5;
 }
@@ -44,4 +52,11 @@ header {
     flex-wrap: wrap;
   }
 }
+
 </style>
+<style>
+body{
+  background-color:darkslategrey;
+}
+</style>
+
