@@ -1,25 +1,42 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from "vue";
+var imagen = ref("gato.jpg");
+const cambiarImagen = (nuevaImagen) => {
+  imagen.value = nuevaImagen;
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" success="texto de prueba"/>
+  <div class="container">
+    <h1>Selector de animales</h1>
+    <div class="botones">
+      <button @click="cambiarImagen('gato.jpg')">Gato</button>
+      <button @click="cambiarImagen('perro.jpg')">Perro</button>
+      <button @click="cambiarImagen('caballo.jpeg')">Caballo</button>
+      <button @click="cambiarImagen('leon.jpg')">Leon</button>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <img :src="imagen" :alt="imagen" />
+  </div>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 223px;
+  margin-top: 2rem;
+}
+
+.botones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .logo {
